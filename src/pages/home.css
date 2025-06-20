@@ -1,0 +1,63 @@
+.home-page {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.create-post {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.create-post textarea {
+  width: 100%;
+  padding: 10px;
+  resize: none;
+  height: 80px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.create-post button {
+  margin-top: 10px;
+  background-color: #0a66c2;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.feed .post-card {
+  background: #fff;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.05);
+}
+
+.post-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.post-actions button {
+  background: none;
+  border: none;
+  color: #0a66c2;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.home-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
