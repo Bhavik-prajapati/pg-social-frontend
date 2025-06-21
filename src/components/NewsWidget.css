@@ -19,3 +19,27 @@
   color: #333;
   font-size: 14px;
 }
+
+
+.news-widget li {
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.news-widget h5 {
+  margin: 0 0 4px;
+  font-size: 15px;
+  color: #0073b1; /* LinkedIn blue */
+  cursor: pointer;
+}
+
+.news-widget h5:hover {
+  text-decoration: underline;
+}
+
+.news-widget p {
+  margin: 0;
+  font-size: 13px;
+  color: #555;
+}

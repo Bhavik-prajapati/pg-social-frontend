@@ -12,21 +12,21 @@ const Profile = () => {
   useEffect(() => {
     const fetchUser = async () => {''
       try {
-        const response = await axiosInstance.get('http://localhost:3000/api/users/userprofile', {
+        const response = await axiosInstance.get('http://localhost:3000/api/users/profile', {
         });
-        setUserData(response.data);
+        setUserData(response.data[0]);
         setFormData({
-          name: response.data.name,
-          email: response.data.email,
-          bio: response.data.bio || '',
-          profile_image: response.data.profile_image || '',
+          name: response.data[0].name,
+          email: response.data[0].email,
+          bio: response.data[0].bio || '',
+          profile_image: response.data[0].profile_image || '',
         });
       } catch (error) {
         console.error('Failed to load profile:', error);
       }
     };
 
-    fetchUser();
+    fetchUser();  
   }, []);
 
   const handleImageChange = (e) => {

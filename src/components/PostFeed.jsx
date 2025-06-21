@@ -9,7 +9,7 @@ function PostFeed() {
 
   const fetchPosts = async () => {
     try {
-      const res = await axiosInstance.get('/posts/getpostsoffollowing');
+      const res = await axiosInstance.get('/posts/');
       console.log("res")
       console.log(res,"Ress");  
       setPosts(res.data);
@@ -36,18 +36,18 @@ function PostFeed() {
 
  
   const follow = async (userid) => {
-  await axios.post(
-    'http://localhost:3000/api/follow/follow',
+  await axiosInstance.post(
+    '/follow/follow',
     { followingId: userid },
   );
-
 };
-
-
  
 
   const unfollow=async(userid)=>{
-    console.log("unfollow",userid)
+    await axiosInstance.post(
+    '/follow/unfollow',
+    { followingId: userid },
+  );
   }
 
   return (
@@ -66,8 +66,7 @@ function PostFeed() {
         <div key={post.id} className="post-card">
         <div className='postownerinfo'>
         <h5>{post.name|| 'User'}</h5>
-          <button className='follow-btn' onClick={()=>follow(post.user_id)}>follow</button>
-          <button className='follow-btn' onClick={()=>unfollow(post.user_id)}>unfollow</button>
+        {!post.isFollowing ? <button className='follow-btn' onClick={()=>follow(post.user_id)}>follow</button> : <button className='follow-btn' onClick={()=>unfollow(post.user_id)}>unfollow</button> }
         </div>
           <p>{post.content}</p>
           <div className="post-actions">

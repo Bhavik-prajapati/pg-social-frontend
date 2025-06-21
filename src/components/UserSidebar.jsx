@@ -1,17 +1,29 @@
+import { useEffect, useState } from 'react';
 import './UserSidebar.css';
+import axiosInstance from '../api/axiosInstance';
 
 function UserSidebar() {
-  const user = {
-    name: 'Jatin Birbal',
-    bio: 'Full Stack Developer | Node.js & React',
-    image: 'https://via.placeholder.com/80',
-  };
+const [userData, setUserData] = useState(null);
+ const fetchUser = async () => {
+      try {
+        const response = await axiosInstance.get('/users/profile', {
+        });
+        setUserData(response.data[0]);
+      } catch (error) {
+        console.error('Failed to load profile:', error);
+      }
+    };
+
+ useEffect(() => {
+    fetchUser();
+  }, []);
 
   return (
     <div className="sidebar">
-      <img src={user.image} alt="User DP" className="sidebar-dp" />
-      <h3>{user.name}</h3>
-      <p className="bio">{user.bio}</p>
+      <img src={userData && userData.profile_image}  className="sidebar-dp" />
+      <h3>{userData && userData.name}</h3>
+      <p>{userData && userData.email}</p>
+      <p className="bio">{userData && userData.bio || `No Bio Added`} </p>
     </div>
   );
 }
