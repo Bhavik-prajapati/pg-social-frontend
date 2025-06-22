@@ -1,20 +1,20 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import './PostFeed.css';
-import axiosInstance from '../api/axiosInstance';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import "./PostFeed.css";
+import axiosInstance from "../api/axiosInstance";
+import { Link } from "react-router-dom";
 
 function PostFeed() {
-  const [postContent, setPostContent] = useState('');
+  const [postContent, setPostContent] = useState("");
   const [posts, setPosts] = useState([]);
+  const [postImage, setPostImage] = useState(null);
 
   const fetchPosts = async () => {
     try {
-      const res = await axiosInstance.get('/posts/');
-      console.log("res")
-      console.log(res,"Ress");  
+      const res = await axiosInstance.get("/posts/");
       setPosts(res.data);
     } catch (error) {
-      console.error("Error fetching posts:", error);  
+      console.error("Error fetching posts:", error);
     }
   };
 
@@ -25,30 +25,40 @@ function PostFeed() {
   const handlePost = async (e) => {
     e.preventDefault();
     try {
-      await axiosInstance.post('http://localhost:3000/api/posts', { content: postContent }, {
+      const formData = new FormData();
+      formData.append("content", postContent);
+
+      if (postImage) {
+        formData.append("image", postImage);
+      }
+      await axiosInstance.post("/posts", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
-      setPostContent('');
+      setPostContent("");
+      setPostImage(null);
+
       fetchPosts();
     } catch (error) {
       console.error("Error creating post:", error);
     }
   };
 
- 
-  const follow = async (userid) => {
-  await axiosInstance.post(
-    '/follow/follow',
-    { followingId: userid },
-  );
-};
- 
+  const likePost = async (postId) => {
+  try {
+    const res = await axiosInstance.post(`/likes/${postId}/like`);
 
-  const unfollow=async(userid)=>{
-    await axiosInstance.post(
-    '/follow/unfollow',
-    { followingId: userid },
-  );
+    console.log( res,"res...")
+    fetchPosts();
+  } catch (error) {
+    console.error("Like error:", error.response?.data || error.message);
   }
+};
+
+
+
+  
 
   return (
     <div className="post-feed">
@@ -59,22 +69,55 @@ function PostFeed() {
           onChange={(e) => setPostContent(e.target.value)}
           required
         />
-        <button type="submit">Post</button>
+
+        <label className="upload-btn">
+          <i className="fa-solid fa-camera"></i> Upload Image
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setPostImage(e.target.files[0])}
+            style={{ display: "none" }}
+          />
+        </label>
+
+        <button type="submit" className="post-submit-btn">
+          Post
+        </button>
       </form>
 
-      {posts.map((post) => (
+      {posts.slice(0, 4).map((post) => (
         <div key={post.id} className="post-card">
-        <div className='postownerinfo'>
-        <h5>{post.name|| 'User'}</h5>
-        {!post.isFollowing ? <button className='follow-btn' onClick={()=>follow(post.user_id)}>follow</button> : <button className='follow-btn' onClick={()=>unfollow(post.user_id)}>unfollow</button> }
-        </div>
+          <div className="postownerinfo">
+            <Link to={`/profile/${post.user_id}`} className="feed-user-info">
+              <img src={post.profile_image} alt="Post" className="feed-dp" />
+              <h5>{post.name || "User"}</h5>
+            </Link>
+          </div>
           <p>{post.content}</p>
+          {post.image_url && (
+            <img src={post.image_url} alt="Post" className="img-fluid" />
+          )}
           <div className="post-actions">
-            <button>👍 Like</button>
-            <button>💬 Comment</button>
+            <button onClick={() => likePost(post.id)}>
+
+              {post.likedByUser==true ? <>
+                    <i className="fa-solid fa-thumbs-up"></i>
+
+              <span>{post.likeCount || 0}</span>
+                </>:<>
+                <i class="fa-regular fa-thumbs-up"></i>
+              <span>{post.likeCount || 0}</span>
+                </>}
+
+              
+            </button>
+            <button>
+              <i class="fa-solid fa-comment"></i>
+              <span>3</span>
+            </button>
           </div>
         </div>
-      ))} 
+      ))}
     </div>
   );
 }

@@ -101,3 +101,77 @@
   margin-left: 10px;
   cursor: pointer;
 }
+.upload-btn {
+  width: 170px;
+  display: inline-block;
+  background-color: #e7f3ff;
+  color: #0073b1;
+  font-weight: 600;
+  padding: 8px 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  border: 1px solid #0073b1;
+  transition: all 0.2s ease-in-out;
+}
+
+.upload-btn:hover {
+  background-color: #d0e6f7;
+}
+
+.post-submit-btn {
+  background-color: #0073b1;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.post-submit-btn:hover {
+  background-color: #005f91;
+}
+
+.post-actions i{
+  font-size: 17px;
+  padding-right: 4px;
+}
+.feed-dp{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-size: contain;
+}
+.feed-user-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.feed-dp {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ccc;
+}
+
+
+
+.like-button {
+  border: none;
+  background: none;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
