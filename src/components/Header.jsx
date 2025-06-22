@@ -32,7 +32,6 @@ function Header() {
     const fetchSearchResults = async (query) => {
        try {
       const response=await axiosInstance.post(`/users/search?emailid=${query}`);
-      console.log(response.data)
       setResults(response.data); 
     } catch (error) {
       console.error("Search error:", error);
