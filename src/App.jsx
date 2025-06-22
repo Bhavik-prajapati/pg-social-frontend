@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import ProfilePage from './pages/ProfilePage';
+import Hello from './pages/Hello';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
 
       <Header/>
       <Routes>
+        <Route path="/hello" element={<Hello />} />
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
