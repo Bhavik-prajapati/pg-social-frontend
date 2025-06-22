@@ -4,10 +4,15 @@ import "./PostFeed.css";
 import axiosInstance from "../api/axiosInstance";
 import { Link } from "react-router-dom";
 
+import { ClipLoader } from "react-spinners"; // 👈 Add this
+
+
 function PostFeed() {
   const [postContent, setPostContent] = useState("");
   const [posts, setPosts] = useState([]);
   const [postImage, setPostImage] = useState(null);
+  const [loading, setLoading] = useState(false); // 👈 Add loading state
+
 
   const fetchPosts = async () => {
     try {
@@ -24,6 +29,8 @@ function PostFeed() {
 
   const handlePost = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
       const formData = new FormData();
       formData.append("content", postContent);
@@ -42,6 +49,8 @@ function PostFeed() {
       fetchPosts();
     } catch (error) {
       console.error("Error creating post:", error);
+    }finally{
+    setLoading(false);
     }
   };
 
@@ -62,6 +71,14 @@ function PostFeed() {
 
   return (
     <div className="post-feed">
+
+       {loading && (
+        <div className="overlay-loader">
+          <ClipLoader size={60} color="#0a66c2" />
+          <p>Uploading your post...</p>
+        </div>
+      )}
+
       <form onSubmit={handlePost} className="create-post-form">
         <textarea
           placeholder="Start a post..."
@@ -79,6 +96,10 @@ function PostFeed() {
             style={{ display: "none" }}
           />
         </label>
+
+        {postImage && (
+  <span className="uploaded-image-name">📁 {postImage.name}</span>
+)}
 
         <button type="submit" className="post-submit-btn">
           Post
