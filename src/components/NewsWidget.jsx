@@ -13,9 +13,7 @@ function NewsWidget() {
 
   const fetchnews = async () => {
     const response = await axios.get(`http://localhost:5000/api/trending-news`);
-    console.log(response.data.news);
     setNews(response.data.news);
-
   }
   useEffect(() => {
 
@@ -27,7 +25,7 @@ function NewsWidget() {
     <div className="news-widget">
   <h3>Trending News</h3>
   <ul>
-    {news.map((item, index) => (
+    {news.slice(0,5).map((item, index) => (
       <li key={index}>
         <h5>{item.headline}</h5>
         <p>{item.summary}</p>
