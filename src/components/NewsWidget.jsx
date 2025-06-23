@@ -1,5 +1,5 @@
 import axios from 'axios';
-import './NewsWidget.css';
+import './css/NewsWidget.css';
 import { useEffect, useState } from 'react';
 
 function NewsWidget() {

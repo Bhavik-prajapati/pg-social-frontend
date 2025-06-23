@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "./PostFeed.css";
+import "./css/PostFeed.css";
 import axiosInstance from "../api/axiosInstance";
 import { Link } from "react-router-dom";
 

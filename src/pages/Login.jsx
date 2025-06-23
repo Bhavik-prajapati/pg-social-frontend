@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
-import './form.css';
+import './css/form.css';
 import { useAuth } from '../context/AuthContext';
 
 function Login() {

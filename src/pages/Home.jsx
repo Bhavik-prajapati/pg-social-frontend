@@ -1,4 +1,4 @@
-import './home.css';
+import './css/home.css';
 import UserSidebar from '../components/UserSidebar';
 import PostFeed from '../components/PostFeed';
 import NewsWidget from '../components/NewsWidget';

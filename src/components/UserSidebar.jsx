@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './UserSidebar.css';
+import './css/UserSidebar.css';
 import axiosInstance from '../api/axiosInstance';
 
 function UserSidebar() {
